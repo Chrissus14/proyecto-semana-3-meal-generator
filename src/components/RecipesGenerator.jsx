@@ -7,10 +7,11 @@ class RecipesGenerator extends Component {
   constructor() {
     super();
     this.state = {
-      recipesArray: []
+      randomRecipe: {},
+      lastItem: []
     };
     this.addRecipe = this.addRecipe.bind(this);
-    this.lastRecipe = this.lastRecipe.bind(this);
+    //this.lastRecipe = this.lastRecipe.bind(this);
   }
 
   addRecipe() {
@@ -23,18 +24,22 @@ class RecipesGenerator extends Component {
     // obtiene un elemento aleatorio de los datos
     let data = recipes[randomNumber];
 
-    let { recipesArray } = this.state;
+    //let { randomRecipe } = this.state;
+    let { lastItem } = this.state;
+    lastItem.push(data);
 
     // añade al arreglo del estado una receta aleatoria
-    recipesArray.push(data);
+    //randomRecipe.push(data);
 
     // obtiene el ultimo elemento agregado al estado
-    const lastItem = [recipesArray.pop()];
+    //const lastItem = [randomRecipe.pop()];
 
     // actualiza el estado
     this.setState({
-      recipesArray: lastItem
+      randomRecipe: { ...data },
+      lastItem: lastItem
     });
+    console.log(this.state.randomRecipe);
   }
 
   render() {
@@ -46,7 +51,7 @@ class RecipesGenerator extends Component {
         </h3>
         <GetRecipeButton event={this.addRecipe} name={'obtener receta'} />
         {/* <GetRecipeButton event={this.lastRecipe} name={'receta anterior'} /> */}
-        {this.state.recipesArray.length > 0 && <Recipe recipe={this.state.recipesArray[0]} />}
+        {this.state.lastItem.length > 0 && <Recipe recipe={this.state.randomRecipe} />}
       </>
     );
   }
