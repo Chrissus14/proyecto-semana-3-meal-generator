@@ -1,4 +1,5 @@
 import React from 'react';
+import Video from './Video';
 
 const Recipe = props => {
   return (
@@ -45,6 +46,9 @@ const Recipe = props => {
                   {props.recipe.ingredient6} - {props.recipe.measure6}
                 </li>
               </ul>
+            </div>
+            <div className="col-md-6">
+              <Video video={props.recipe.mealVideo} />
             </div>
           </div>
         </div>
