@@ -13,19 +13,27 @@ class RecipesGenerator extends Component {
   }
 
   addRecipe() {
-    let { recipesArray } = this.state;
-    let renderComp = [];
-    const size = recipes.length;
+    // tamaño total de los datos
+    const size = recipes.length - 1;
+
+    // numero aleatorio entre 0 y size
     let randomNumber = Math.round(Math.random() * size);
-    recipesArray.push(recipes[randomNumber]);
-    if (recipesArray > 0) {
-      renderComp = recipesArray.pop();
-    }
+
+    // obtiene un elemento aleatorio de los datos
+    let data = recipes[randomNumber];
+
+    let { recipesArray } = this.state;
+
+    // añade al arreglo del estado una receta aleatoria
+    recipesArray.push(data);
+
+    // obtiene el ultimo elemento agregado al estado
+    const lastItem = [recipesArray.pop()];
+
+    // actualiza el estado
     this.setState({
-      recipesArray: renderComp
+      recipesArray: lastItem
     });
-    console.log(randomNumber);
-    console.log(this.state.recipesArray);
   }
   render() {
     return (
@@ -35,7 +43,7 @@ class RecipesGenerator extends Component {
           ¿Cansado de hacer esa misma pregunta? <br /> haga clic para obtener una receta al azar
         </h3>
         <GetRecipeButton event={this.addRecipe} />
-        {this.state.recipesArray.length > 0 && <Recipe recipe={this.state.recipesArray} />}
+        {this.state.recipesArray.length > 0 && <Recipe recipe={this.state.recipesArray[0]} />}
       </>
     );
   }
