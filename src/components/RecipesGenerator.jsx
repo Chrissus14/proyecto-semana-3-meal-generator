@@ -10,6 +10,7 @@ class RecipesGenerator extends Component {
       recipesArray: []
     };
     this.addRecipe = this.addRecipe.bind(this);
+    this.lastRecipe = this.lastRecipe.bind(this);
   }
 
   addRecipe() {
@@ -35,6 +36,7 @@ class RecipesGenerator extends Component {
       recipesArray: lastItem
     });
   }
+
   render() {
     return (
       <>
@@ -43,6 +45,7 @@ class RecipesGenerator extends Component {
           ¿Cansado de hacer esa misma pregunta? <br /> haga clic para obtener una receta al azar
         </h3>
         <GetRecipeButton event={this.addRecipe} name={'obtener receta'} />
+        {/* <GetRecipeButton event={this.lastRecipe} name={'receta anterior'} /> */}
         {this.state.recipesArray.length > 0 && <Recipe recipe={this.state.recipesArray[0]} />}
       </>
     );

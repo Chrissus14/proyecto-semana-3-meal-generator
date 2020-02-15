@@ -48,11 +48,6 @@ const Recipe = props => {
             </div>
           </div>
         </div>
-        <video width="400" controls className="mt-5">
-          <source src={props.recipe.mealVideo} type="video/mp4 codecs=dirac, speex" />
-          <source src={props.recipe.mealVideo} type="video/ogg codecs=dirac, speex" />
-          Tu navegador no implementa el elemento <code>video</code>.
-        </video>
       </section>
     </>
   );
