@@ -42,7 +42,7 @@ class RecipesGenerator extends Component {
         <h3 className="font-italic font-weight-bold">
           ¿Cansado de hacer esa misma pregunta? <br /> haga clic para obtener una receta al azar
         </h3>
-        <GetRecipeButton event={this.addRecipe} />
+        <GetRecipeButton event={this.addRecipe} name={'obtener receta'} />
         {this.state.recipesArray.length > 0 && <Recipe recipe={this.state.recipesArray[0]} />}
       </>
     );
