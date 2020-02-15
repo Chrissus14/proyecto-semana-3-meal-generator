@@ -8,12 +8,13 @@ class RecipesGenerator extends Component {
     super();
     this.state = {
       randomRecipe: {},
-      lastItem: []
+      recipesArray: []
     };
     this.addRecipe = this.addRecipe.bind(this);
-    //this.lastRecipe = this.lastRecipe.bind(this);
+    this.lastRecipe = this.lastRecipe.bind(this);
   }
 
+  // Agrega un receta aleatoria
   addRecipe() {
     // tamaño total de los datos
     const size = recipes.length - 1;
@@ -25,21 +26,25 @@ class RecipesGenerator extends Component {
     let data = recipes[randomNumber];
 
     //let { randomRecipe } = this.state;
-    let { lastItem } = this.state;
-    lastItem.push(data);
-
-    // añade al arreglo del estado una receta aleatoria
-    //randomRecipe.push(data);
-
-    // obtiene el ultimo elemento agregado al estado
-    //const lastItem = [randomRecipe.pop()];
+    let { recipesArray } = this.state;
+    recipesArray.push(data);
 
     // actualiza el estado
     this.setState({
       randomRecipe: { ...data },
-      lastItem: lastItem
+      recipesArray: [...recipesArray]
     });
     console.log(this.state.randomRecipe);
+  }
+
+  // regresa a la receta anterior
+  lastRecipe() {
+    let { recipesArray } = this.state;
+    let last = recipesArray.pop();
+    this.setState({
+      randomRecipe: last
+    });
+    // console.log(this.state.randomRecipe);
   }
 
   render() {
@@ -49,9 +54,11 @@ class RecipesGenerator extends Component {
         <h3 className="font-italic font-weight-bold">
           ¿Cansado de hacer esa misma pregunta? <br /> haga clic para obtener una receta al azar
         </h3>
-        <GetRecipeButton event={this.addRecipe} name={'obtener receta'} />
-        {/* <GetRecipeButton event={this.lastRecipe} name={'receta anterior'} /> */}
-        {this.state.lastItem.length > 0 && <Recipe recipe={this.state.randomRecipe} />}
+        <div className="d-flex">
+          <GetRecipeButton event={this.addRecipe} name={'obtener receta'} />
+          <GetRecipeButton event={this.lastRecipe} name={'receta anterior'} />
+        </div>
+        {this.state.recipesArray.length > 0 && <Recipe recipe={this.state.randomRecipe} />}
       </>
     );
   }
